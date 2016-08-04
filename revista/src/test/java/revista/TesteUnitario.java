@@ -62,7 +62,7 @@ public class TesteUnitario {
 		
 		//testePermissao();
 		
-		//testeUsuario();
+		testeUsuario();
 		
 		
 		//Inicio do que vais colocar no teu c�dgio, Avelino

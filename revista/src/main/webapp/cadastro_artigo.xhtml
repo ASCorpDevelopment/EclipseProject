@@ -13,7 +13,7 @@
 
 	<h:form id="frm-artigo">
 		<p:messages showDetail="false" showSummary="true" />
-		<p:button outcome="conartigo" value="Pesquiar " />
+		<p:button  value="Pesquiar " />
 		
 		<p:panelGrid columns="2">
 			<h:outputLabel value="Titulo" for="titulo" />
@@ -51,7 +51,7 @@
 
 			<h:outputLabel />
 			<h:panelGroup>
-				<h:commandButton value="Salvar" action="#{cadastroArtigoBean.salvar}"></h:commandButton>
+				<h:commandButton value="Salvar" action="#{cadastroArtigoBean.salvar}" />
 				<h:commandButton value="Limpar" type="reset" />
 			</h:panelGroup>
 

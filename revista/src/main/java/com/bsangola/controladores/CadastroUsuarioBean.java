@@ -11,8 +11,6 @@ import com.bsangola.modelos.Permissao;
 import com.bsangola.modelos.Usuario;
 import com.bsangola.servico.Permissoes;
 import com.bsangola.servico.Usuarios;
-import com.bsangola.util.CalendarUtil;
-import com.bsangola.util.FacesUtil;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -40,20 +38,7 @@ public class CadastroUsuarioBean implements Serializable {
 	}
 
 	public void salvar() {
-		this.getUsuario().setDataCadastro(CalendarUtil.dataDeHoje());
-		try {
-			
-			if(!this.usuario.getCodigo().equals("") && this.usuario.getCodigo() != null){
-				new Usuarios().editar(this.usuario.getCodigo());
-				FacesUtil.addMensagemInformacao("Usuário salvo com sucesso! ");
-			}else {
-				new Usuarios().criar(this.usuario);
-				FacesUtil.addMensagemInformacao("Usuário salvo com sucesso! ");
-			}
-		} catch (Exception e) {
-			FacesUtil.addMensagemErro("Erro ao tentar salvar usuario! ");
-			e.printStackTrace();
-		}
+		new Usuarios().criar(this.usuario);
 		this.setUsuario(new Usuario());
 	}
 

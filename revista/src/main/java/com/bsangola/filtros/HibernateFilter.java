@@ -13,34 +13,35 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import com.bsangola.util.HibernateUtil;
+import com.bsangola.util.JPAUtil;
 
-@WebFilter(servletNames={"Faces Servlet"})
+@WebFilter(servletNames = { "Faces Servlet" })
 public class HibernateFilter implements Filter {
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {		
+	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		EntityManagerFactory factory =  HibernateUtil.getEntityManagerFactory();
-		EntityManager manager = factory.createEntityManager();;
-		EntityTransaction transaction = manager.getTransaction();;
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
+		EntityManagerFactory factory = JPAUtil.getEntityManagerFactory();
+		EntityManager manager = factory.createEntityManager();
+		EntityTransaction transaction = manager.getTransaction();
+
 		try {
 			transaction.begin();
 			request.setAttribute("manager", manager);
-			
+
 			chain.doFilter(request, response);
-			
-			transaction.commit();			
+
+			transaction.commit();
 		} catch (Exception e) {
-			if(transaction != null){
+			if (transaction != null) {
 				transaction.rollback();
-			}			
-		}finally {
+			}
+			e.printStackTrace();
+		} finally {
 			manager.close();
 		}
 	}

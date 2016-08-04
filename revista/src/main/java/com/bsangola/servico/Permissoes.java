@@ -4,59 +4,66 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import com.bsangola.daos.PermissaoDAO;
 import com.bsangola.modelos.Permissao;
-import com.bsangola.util.HibernateUtil;
+import com.bsangola.util.FacesUtil;
 
 @SuppressWarnings("serial")
 public class Permissoes implements Serializable{
 
 	private EntityManager manager;
 	private PermissaoDAO permissaoDAO;
-	private EntityTransaction transaction;
 	
 	public Permissoes() {
+		this.manager = FacesUtil.getRequestManager();
+		this.permissaoDAO = new PermissaoDAO(manager);
 	}
 	
-	private void init(){
-		this.manager = HibernateUtil.getEntityManagerFactory().createEntityManager();
-		this.permissaoDAO = new PermissaoDAO(manager);
-		this.transaction = manager.getTransaction();
+	
+
+	public List<Permissao> buscarTodos() {
+		try {
+
+			return this.permissaoDAO.buscarTodos();
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possivel buscar a lista das permissões.");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public List<Permissao> buscarTodos(){
-		init();
-		return this.permissaoDAO.buscarTodos();
-	}
-	
-	public void criar(Permissao permissao){
-		init();
+	public void criar(Permissao permissao) {
 		try {
-			this.transaction.begin();
+
 			this.permissaoDAO.criar(permissao);
-			this.transaction.commit();
-		} catch (Exception e) {
-			this.transaction.rollback();
+			this.manager.flush();
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível efectuar a operação.");
+			e.printStackTrace();
 		}
-		
 	}
-	
-	public Permissao buscarPorCodigo(Long codigo){
-		init();
-		return this.permissaoDAO.burcarPorCodigo(codigo);
-	}
-	
-	public void eliminar(Permissao permissao, Long codigo){
-		init();
+
+	public Permissao buscarPorCodigo(Long codigo) {
 		try {
-			this.transaction.begin();
-			this.permissaoDAO.elininar(permissao, codigo);
-			this.transaction.commit();
-		} catch (Exception e) {
-			this.transaction.rollback();
+
+			return this.permissaoDAO.burcarPorCodigo(codigo);
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível efectuar a operação.");
+			e.printStackTrace();
 		}
-					
-	}	
+		return null;
+	}
+
+	public void eliminar(Long codigo) {
+		try {
+
+			this.permissaoDAO.elininar(codigo);
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível eliminar a permissão.");
+			e.printStackTrace();
+		}
+	}
 }

@@ -4,63 +4,65 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import com.bsangola.daos.ArtigoDAO;
 import com.bsangola.modelos.Artigo;
-import com.bsangola.util.HibernateUtil;
+import com.bsangola.util.FacesUtil;
 
 @SuppressWarnings("serial")
 public class Artigos implements Serializable {
 
 	private EntityManager manager;
 	private ArtigoDAO artigoDAO;
-	private EntityTransaction transaction;
 
 	public Artigos() {
-
-	}
-
-	private void init() {
-		this.manager = HibernateUtil.getEntityManagerFactory().createEntityManager();
+		this.manager = FacesUtil.getRequestManager();
 		this.artigoDAO = new ArtigoDAO(manager);
-		this.transaction = manager.getTransaction();
 	}
 
 	public List<Artigo> buscarTodos() {
-		init();
-		return this.artigoDAO.buscarTodos();
+		try {
+
+			return this.artigoDAO.buscarTodos();
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possivel buscar a lista das artigos.");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public void criar(Artigo artigo){
-		init();
+	public void criar(Artigo artigo) {
 		try {
-			transaction.begin();
+
 			this.artigoDAO.criar(artigo);
-			transaction.commit();
-		} catch (Exception e) {
-			transaction.rollback();
-		}finally {
-			this.manager.close();
+			this.manager.flush();
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível efectuar a operação.");
+			e.printStackTrace();
 		}
 	}
 
-	public Artigo buscarPorCodigo(Long codigo){
-		init();
-		return this.artigoDAO.burcarPorCodigo(codigo);
-	}
-
-	public void eliminar(Artigo artigo, Long codigo) {
-		init();
+	public Artigo buscarPorCodigo(Long codigo) {
 		try {
-			transaction.begin();
-			this.artigoDAO.elininar(artigo, codigo);
-			transaction.commit();
-		} catch (Exception e) {
-			transaction.rollback();
-		}finally {
-			this.manager.close();
+
+			return this.artigoDAO.burcarPorCodigo(codigo);
+
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível efectuar a operação.");
+			e.printStackTrace();
 		}
-		
+		return null;
+	}
+
+	public void eliminar(Long codigo) {
+		try {
+
+			this.artigoDAO.elininar(codigo);
+		} catch (NegocioException e) {
+			FacesUtil.addMensagemErro("Não foi possível eliminar a artigo.");
+			e.printStackTrace();
+		}
 	}
 }

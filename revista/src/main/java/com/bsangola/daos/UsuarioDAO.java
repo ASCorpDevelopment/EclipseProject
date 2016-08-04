@@ -6,7 +6,14 @@ import javax.persistence.EntityManager;
 
 import com.bsangola.cruds.UsuarioCRUD;
 import com.bsangola.modelos.Usuario;
+import com.bsangola.servico.NegocioException;
+import com.bsangola.util.FacesUtil;
 
+/**
+ * 
+ * @author adilson
+ *
+ */
 public class UsuarioDAO implements UsuarioCRUD{
 	
 	private EntityManager manager;
@@ -16,32 +23,23 @@ public class UsuarioDAO implements UsuarioCRUD{
 	}
 
 	@Override
-	public List<Usuario> buscarTodos() {
+	public List<Usuario> buscarTodos() throws NegocioException {
 		return this.manager.createQuery("from Usuario", Usuario.class).getResultList();
 	}
 
+	
 	@Override
-	public Usuario burcarPorCodigo(Long codigo) {
+	public Usuario burcarPorCodigo(Long codigo) throws NegocioException {
 		return this.manager.find(Usuario.class, codigo);
 	}
 
 	@Override
-	public void criar(Usuario usuario) {
+	public void criar(Usuario usuario) throws NegocioException {
 		this.manager.merge(usuario);
-		this.manager.flush();
 	}
 
 	@Override
-	public void elininar(Usuario usuario, Long codigo) {
-		this.manager.remove(this.manager.find(usuario.getClass(), codigo));
-		this.manager.flush();	
+	public void elininar(Long codigo) throws NegocioException {
+		this.manager.remove(burcarPorCodigo(codigo));
 	}
-
-	@Override
-	public void editar(Long codigo) {
-		Usuario usuario = this.burcarPorCodigo(codigo);
-		this.criar(usuario);
-	}
-
-	
 }

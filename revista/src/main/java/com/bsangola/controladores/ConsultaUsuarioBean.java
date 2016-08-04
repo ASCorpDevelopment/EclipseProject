@@ -30,6 +30,10 @@ public class ConsultaUsuarioBean implements Serializable {
 	public List<Usuario> getLista() {
 		return usuario;
 	}
+	
+	public void eliminar(){
+		
+	}
 
 	public void setLista(List<Usuario> lista) {
 		this.usuario = lista;

@@ -13,7 +13,7 @@
 	<h1>Consulta de Usuário</h1>
 
 	<h:form id="frm-usuario">
-		<h:messages showDetail="false" showSummary="true" />
+		<p:messages showDetail="false" showSummary="true" />
 		
 		<p:dataTable border="1" value="#{consultaUsuarioBean.lista}" var="usuario">
 		<f:facet name="header">Usuário</f:facet>
@@ -62,11 +62,11 @@
 			
 			<p:column>
 			<p:link outcome="cadastro_usuario">
-				<p:button value="" icon="ui-icon-pencil" />
+				<p:button  icon="ui-icon-pencil" />
 				<f:param name="codigo" value="#{usuario.codigo}"></f:param>
 			</p:link>
-				
-				<p:button value="" icon="ui-icon-trash" />
+			
+			<p:commandButton icon="ui-icon-trash" action="#{consultaUsuarioBean.eliminar}"   />
 			</p:column>
 		</p:dataTable>
 		

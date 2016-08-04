@@ -19,6 +19,7 @@
 		<div class="row"> 
 			<div class="col-sm-12">
 				<h:form id="frm-usuario">
+					
 					<p:messages showDetail="false" showSummary="true" />
 		
 					<p:panelGrid columns="2">
@@ -52,13 +53,14 @@
 		
 						<p:outputLabel value="Permissões" />
 						<p:selectManyCheckbox value="#{cadastroUsuarioBean.usuario.permissoes}" label="Permissão" converter="com.bsangola.ConversorPermissao">
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
 							<f:selectItems value="#{cadastroUsuarioBean.permissaos}" var="permissao" itemValue="#{permissao}" itemLabel="#{permissao.permissao}" />
 						</p:selectManyCheckbox>
 		
 						<p:outputLabel />
 						<h:panelGroup>
-							<p:commandButton value="Salvar" action="#{cadastroUsuarioBean.salvar}"></p:commandButton>
-							<p:commandButton value="Limpar" type="reset" />
+							<h:commandButton value="Salvar" action="#{cadastroUsuarioBean.salvar}" />
+							<h:commandButton value="Limpar" type="reset" />
 						</h:panelGroup>
 					</p:panelGrid>
 				</h:form>
