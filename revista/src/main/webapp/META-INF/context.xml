@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Relm className="org.apache.catalina.realm.JDBCRealm" 
+		driverName="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/revista"
+		connectionName="root" connectionPassword="Ad19sa92co"
+		
+		userTable="pessoa" userNameCol="login" 
+		userCredCol="senha" userRoleTable="usuario_permissao"
+		roleNameCol="permissao"></Relm>	
+		<!-- Obs: colocar o driver so mysql na pasta lib do tomcat > web.xml -->
+</Context>

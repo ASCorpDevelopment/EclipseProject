@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>revista</display-name>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+<!--  
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/index.xhtml</form-login-page>
+			<form-error-page>/index.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-role>
+		<role-name>admininstrador</role-name>
+	</security-role>
+	<security-role>
+		<role-name>usuario</role-name>
+	</security-role>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Consultas</web-resource-name>
+			<url-pattern>/consulta_artigo.xhtml</url-pattern>
+			<url-pattern>/consulta_usuario.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>usuario</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Cadastros e Consultas</web-resource-name>
+			<url-pattern>/consulta_artigo.xhtml</url-pattern>
+			<url-pattern>/consulta_usuario.xhtml</url-pattern>
+			
+			<url-pattern>/cadastro_artigo.xhtml</url-pattern>
+			<url-pattern>/cadastro_usuario.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admininstrador</role-name>
+		</auth-constraint>
+	</security-constraint>
+-->
+</web-app>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Artigo</title>
+</h:head>
+<h:body>
+	<h1>Cadastro de Artigo</h1>
+
+	<h:form id="frm-artigo">
+		<p:messages showDetail="false" showSummary="true" />
+		<p:button outcome="conartigo" value="Pesquiar " />
+		
+		<p:panelGrid columns="2">
+			<h:outputLabel value="Titulo" for="titulo" />
+			<h:panelGroup>
+				<h:inputText id="titulo" value="#{cadastroArtigoBean.artigo.titulo}" required="true" label="Titulo" />
+				<h:message for="titulo" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Categoria" for="categoria"/>
+			<h:panelGroup>
+				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.categoria}" label="Categoria" id="categoria">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroArtigoBean.categoria}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.categoria}" />
+				</h:selectOneMenu>
+				<h:message for="categoria" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Estado" for="estado"/>
+			<h:panelGroup>
+				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.estado}" label="Estado" id="estado">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroArtigoBean.estado}" var="estado" itemValue="#{estado}" itemLabel="#{estado.estado}" />
+				</h:selectOneMenu>
+				<h:message for="estado" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Artigo" for="artigo"/>
+			<h:panelGroup>
+				<h:inputTextarea value="#{cadastroArtigoBean.artigo.artigo}" label="Artigo" id="artigo"/>
+				<h:message for="artigo" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+			
+			<p:outputLabel value="Upload da imagem" />
+			<p:fileUpload  mode="simple" skinSimple="true" value="carregar" label="carregar"  />
+
+			<h:outputLabel />
+			<h:panelGroup>
+				<h:commandButton value="Salvar" action="#{cadastroArtigoBean.salvar}"></h:commandButton>
+				<h:commandButton value="Limpar" type="reset" />
+			</h:panelGroup>
+
+		</p:panelGrid>
+
+	</h:form>
+</h:body>
+</html>
