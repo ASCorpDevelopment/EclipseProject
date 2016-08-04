@@ -18,6 +18,7 @@ public class ConsultaUsuarioBean implements Serializable {
 
 	private List<Usuario> usuario;
 	private List<Permissao> permissao;
+	private Usuario usuarioSelecionado;
 
 	public ConsultaUsuarioBean() {
 	}
@@ -32,7 +33,8 @@ public class ConsultaUsuarioBean implements Serializable {
 	}
 	
 	public void eliminar(){
-		
+		new Usuarios().eliminar(this.getUsuarioSelecionado().getCodigo());
+		init();
 	}
 
 	public void setLista(List<Usuario> lista) {
@@ -45,5 +47,13 @@ public class ConsultaUsuarioBean implements Serializable {
 
 	public void setPermissao(List<Permissao> permissao) {
 		this.permissao = permissao;
+	}
+
+	public Usuario getUsuarioSelecionado() {
+		return usuarioSelecionado;
+	}
+
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+		this.usuarioSelecionado = usuarioSelecionado;
 	}
 }

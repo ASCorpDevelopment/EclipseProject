@@ -15,7 +15,7 @@
 	<h:form id="frm-usuario">
 		<p:messages showDetail="false" showSummary="true" />
 		
-		<p:dataTable border="1" value="#{consultaUsuarioBean.lista}" var="usuario">
+		<p:dataTable border="1" value="#{consultaUsuarioBean.lista}" var="usuario" paginator="true" paginatorAlwaysVisible="true" paginatorPosition="botoom">
 		<f:facet name="header">Usuário</f:facet>
 		
 			<p:column>
@@ -24,7 +24,7 @@
 			</p:column>
 		
 			<p:column>
-				<f:facet name="header">Nome completo</f:facet>
+				<f:facet name="header">Nome</f:facet>
 				<h:panelGroup>
 					<h:outputText value="#{usuario.nome}" />
 				</h:panelGroup>
@@ -57,7 +57,7 @@
 			
 			<p:column>
 				<f:facet name="header">Permissões</f:facet>
-				<h:outputText  />
+				<p:commandButton icon="ui-icon-link" />
 			</p:column>
 			
 			<p:column>
@@ -66,7 +66,10 @@
 				<f:param name="codigo" value="#{usuario.codigo}"></f:param>
 			</p:link>
 			
-			<p:commandButton icon="ui-icon-trash" action="#{consultaUsuarioBean.eliminar}"   />
+			<p:commandButton icon="ui-icon-trash" action="#{consultaUsuarioBean.eliminar}"  >
+					<f:setPropertyActionListener value="#{usuario}" target="#{consultaUsuarioBean.usuarioSelecionado}" />
+			</p:commandButton>		
+			
 			</p:column>
 		</p:dataTable>
 		
