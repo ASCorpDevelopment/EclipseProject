@@ -1,69 +1,85 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/template-administrator.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Consulta de Artigo</title>
-</h:head>
-<h:body>
-	<h1>Consulta de Artigo</h1>
 
-	<h:form id="frm-artigo">
-		<h:messages showDetail="false" showSummary="true" />
+	<ui:define name="titulo">Listagem de artigo</ui:define>
+
+	<ui:define name="conteudo">
+	<h3 class="breadcrumb">Listagem de artigos</h3>
+
+		<h:form id="frm-artigo">
+			
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading"></div>
+
+				<h:messages showDetail="false" showSummary="true" />
+				<h:dataTable border="1" value="#{consultaArtigoBean.artigo}"
+					var="artigo" styleClass="table table-bordered table-hover">
+
+					<p:column>
+						<f:facet name="header">Código</f:facet>
+						<h:outputText value="#{artigo.codigo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Titulo</f:facet>
+						<h:panelGroup>
+							<h:outputText value="#{artigo.titulo}" />
+						</h:panelGroup>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Categoria</f:facet>
+						<h:outputText value="#{artigo.categoria}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Estado</f:facet>
+						<h:outputText value="#{artigo.estado}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Data de cadastro</f:facet>
+						<h:outputText value="#{artigo.dataCadastro}">
+							<f:convertDateTime pattern="dd/MM/yyy" locale="pt" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Data de publicação</f:facet>
+						<h:outputText value="#{artigo.dataPublicacao}">
+							<f:convertDateTime pattern="dd/MM/yyy" locale="pt" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Data da despublicação</f:facet>
+						<h:outputText value="#{artigo.dataDespublicacao}">
+							<f:convertDateTime pattern="dd/MM/yyy" locale="pt" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Imagen</f:facet>
+						<h:outputText value="#{artigo.imagem}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Acões</f:facet>
+						<p:link>
+							<p:button icon="ui-icon-pencil" title="editar" />
+						</p:link>
+
+						<p:commandButton icon="ui-icon-trash" title="eliminar">
+						</p:commandButton>
+					</p:column>
+				</h:dataTable>
+			</div>
+		</h:form>
 		
-		<p:dataTable border="1" value="#{consultaArtigoBean.artigo}" var="artigo">
-		
-			<p:column>
-				<f:facet name="header">Código</f:facet>
-				<h:outputText value="#{artigo.codigo}" />
-			</p:column>
-		
-			<p:column>
-				<f:facet name="header">Titulo</f:facet>
-				<h:panelGroup>
-					<h:outputText value="#{artigo.titulo}" />
-				</h:panelGroup>
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Categoria</f:facet>
-				<h:outputText value="#{artigo.categoria}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Estado</f:facet>
-				<h:outputText value="#{artigo.estado}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Data de cadastro</f:facet>
-				<h:outputText value="#{artigo.dataCadastro}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Data de publicação</f:facet>
-				<h:outputText value="#{artigo.dataPublicacao}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Data da despublicação</f:facet>
-				<h:outputText value="#{artigo.dataDespublicacao}" />
-			</p:column>
-			
-			<p:column>
-				<f:facet name="header">Imagen</f:facet>
-				<h:outputText value="#{artigo.imagem}" />
-			</p:column>
-			
-			<p:column>
-				<h:button value="Eliminar" />
-				<h:button value="Editar" />
-			</p:column>
-		</p:dataTable>
-		
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

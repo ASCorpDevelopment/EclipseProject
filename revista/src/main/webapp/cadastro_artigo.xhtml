@@ -1,62 +1,47 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/template-administrator.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Cadastro de Artigo</title>
-</h:head>
-<h:body>
-	<h1>Cadastro de Artigo</h1>
 
-	<h:form id="frm-artigo">
-		<p:messages showDetail="false" showSummary="true" />
-		<p:button  value="Pesquiar " />
-		
-		<p:panelGrid columns="2">
-			<h:outputLabel value="Titulo" for="titulo" />
-			<h:panelGroup>
-				<h:inputText id="titulo" value="#{cadastroArtigoBean.artigo.titulo}" required="true" label="Titulo" />
-				<h:message for="titulo" showSummary="true" showDetail="false" />
-			</h:panelGroup>
+	<ui:define name="titulo">Cadastro de artigo</ui:define>
+
+	<ui:define name="conteudo">
 			
-			<h:outputLabel value="Categoria" for="categoria"/>
-			<h:panelGroup>
-				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.categoria}" label="Categoria" id="categoria">
+		<h3 class="breadcrumb">Cadastro de artigos</h3>
+		<h:form id="frm-artigo">
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading"></div>
+				<p:messages showDetail="false" showSummary="true" />
+			<h:panelGrid columns="2" size="20" >
+				<h:outputLabel value="Titulo" for="titulo" styleClass="col-sm-2 control-label"   />
+				<h:inputText id="titulo" value="#{cadastroArtigoBean.artigo.titulo}" required="true" label="Titulo" styleClass="form-control" size="60" />
+				
+				<h:outputLabel value="Categoria" for="categoria" styleClass="col-sm-2 control-label" />
+				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.categoria}" label="Categoria" id="categoria" styleClass="form-control">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroArtigoBean.categoria}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.categoria}" />
 				</h:selectOneMenu>
-				<h:message for="categoria" showSummary="true" showDetail="false" />
-			</h:panelGroup>
-			
-			<h:outputLabel value="Estado" for="estado"/>
-			<h:panelGroup>
-				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.estado}" label="Estado" id="estado">
+				
+				<h:outputLabel value="Estado" for="estado" styleClass="col-sm-2 control-label" />
+				<h:selectOneMenu value="#{cadastroArtigoBean.artigo.estado}" label="Estado" id="estado" styleClass="form-control col-xs-4">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroArtigoBean.estado}" var="estado" itemValue="#{estado}" itemLabel="#{estado.estado}" />
 				</h:selectOneMenu>
-				<h:message for="estado" showSummary="true" showDetail="false" />
-			</h:panelGroup>
-			
-			<h:outputLabel value="Artigo" for="artigo"/>
-			<h:panelGroup>
-				<h:inputTextarea value="#{cadastroArtigoBean.artigo.artigo}" label="Artigo" id="artigo"/>
-				<h:message for="artigo" showSummary="true" showDetail="false" />
-			</h:panelGroup>
-			
-			<p:outputLabel value="Upload da imagem" />
-			<p:fileUpload  mode="simple" skinSimple="true" value="carregar" label="carregar"  />
+					
+				<h:outputLabel value="Artigo" for="artigo" styleClass="col-sm-2 control-label" />
+				<h:inputTextarea value="#{cadastroArtigoBean.artigo.artigo}" label="Artigo" id="artigo" />
 
-			<h:outputLabel />
-			<h:panelGroup>
+				<p:outputLabel value="Upload" styleClass="col-sm-2 control-label"/>
+				<p:fileUpload mode="simple" skinSimple="true" value="carregar" label="carregar" />
+
 				<h:commandButton value="Salvar" action="#{cadastroArtigoBean.salvar}" />
 				<h:commandButton value="Limpar" type="reset" />
-			</h:panelGroup>
-
-		</p:panelGrid>
-
-	</h:form>
-</h:body>
-</html>
+			</h:panelGrid>	
+			</div>
+		</h:form> 
+		
+	</ui:define>
+</ui:composition>
